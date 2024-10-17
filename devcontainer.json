@@ -1,0 +1,17 @@
+{
+    "name": "acroba_hackathon",
+    "image": "acroba_hackathon:latest",
+    "runArgs": [
+        "--privileged",
+        "--net=bridge",
+        "-e",
+        "DISPLAY=host.docker.internal:0.0",
+        "-v",
+        "/tmp/.X11-unix:/tmp/.X11-unix:rw",
+		"-p",
+		"10000:10000"
+    ],
+    "workspaceMount": "src=${localWorkspaceFolder},dst=/home/acroba/ros-workspaces/ros1-noetic/src,type=bind,consistency=cached",
+    "workspaceFolder": "/home/acroba/ros-workspaces/ros1-noetic",
+    "postCreateCommand": "sudo apt-get update && rosdep update && rosdep install --from-paths src --ignore-src -y"
+}

@@ -1,0 +1,11 @@
+<launch>
+<!-- Sample with parallel gripper-->
+<arg name="tcp_ip" default="192.168.105.104"/>
+
+<include file="$(find ros_tcp_endpoint)/launch/endpoint.launch">
+    <arg name="tcp_ip" value="$(arg tcp_ip)"/>
+</include>
+
+<node name="acroba_skill_camera" pkg="acroba_gym" type="CameraSkill.py" output="screen"/>
+<node name="gym_test" pkg="acroba_gym" type="ros_gym_test.py" output="screen" required="true"/>
+</launch>

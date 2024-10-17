@@ -1,0 +1,22 @@
+<launch>
+    <param name="base_robot" type="string" value="world" />
+    <param name="end_tool" type="string" value="end_tool" />
+    <arg name="endpoint_tcp_ip" default="172.17.0.2"/>
+    <arg name="endpoint_port" default="10000"/>
+
+    <!-- use simulation time -->
+    <rosparam param="/use_sim_time">true</rosparam>
+    
+    <!-- unity ros tcp connector -->
+    <include file="$(find ros_tcp_endpoint)/launch/endpoint.launch">
+        <arg name="tcp_ip" value="$(arg endpoint_tcp_ip)"/>
+        <arg name="tcp_port" value="$(arg endpoint_port)"/>
+    </include>
+
+    <!-- unity collaborative scene binary through aliencontrol -->
+    
+    <!-- MoveIt with vg argument set to true -->
+    <include file="$(find hackathon_moveit_config)/launch/hackathon_moveit_config_planning_execution.launch">
+    	<arg name="vg" value="true"/>
+    </include>
+</launch>
